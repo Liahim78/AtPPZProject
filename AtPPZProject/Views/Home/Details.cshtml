@@ -1,0 +1,54 @@
+﻿@model DAL.Entity.Video
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Video</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlVideoContent)
+        </dt>
+
+        <dd>
+            <video controls="controls"
+                   class="video-stream"
+                   x-webkit-airplay="allow"
+                   data-youtube-id="N9oxmRT2YWw"
+                   src="@Model.UrlVideoContent"></video>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+        <dt>
+            Comments
+        </dt>
+        <dd>
+            <dl class="dl-horizontal">
+            @foreach (var comment in Model.Comments)
+            {
+                <dt>@comment.User.FirsName</dt>
+                <dd>@comment.Text</dd>
+            }
+            </dl>
+        </dd>
+    </dl>
+</div>
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Look old versions", "OldVideos", new {id = Model.Id})
+    } |
+    @Html.ActionLink("Back to List", "Index")
+</p>
