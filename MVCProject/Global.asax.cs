@@ -18,7 +18,7 @@ namespace MVCProject
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer(new Initializator());
+            //Database.SetInitializer(new Initializator());
         }
     }
 }

@@ -16,11 +16,12 @@ namespace MVCProject.Controllers
         // GET: Videos
         public ActionResult Index()
         {
+            string id= User.Identity.GetUserId();
             var v = from video in db.Videos
-                    where video.IsNew && video.MyUser.Id == User.Identity.GetUserId()
+                    where video.IsNew && video.MyUser.Id ==id
                     orderby video.Likes.Count descending
                     select video;
-            return View(v);
+            return View(v.ToList());
         }
 
         // GET: Videos/Details/5
@@ -53,8 +54,9 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                string id = User.Identity.GetUserId();
                 video.MyUser = (from u in db.Users
-                                where u.Id == User.Identity.GetUserId()
+                                where u.Id == id
                                 select u).SingleOrDefault();
                 video.DateTime = DateTime.Now;
                 video.IsNew = true;
@@ -86,7 +88,7 @@ namespace MVCProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UrlVideoContent,IsPublic,IsNew,Discription,DateTime,MainId")] Video video)
+        public ActionResult Edit([Bind(Include = "Id,UrlVideoContent,IsPublicDiscription")] Video video)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +98,7 @@ namespace MVCProject.Controllers
                 oldVideo.IsPublic = video.IsPublic;
                 db.Entry(oldVideo).State = EntityState.Modified;
                 db.SaveChanges();
-                return Redirect("Index");
+                return RedirectToAction("Index");
             }
             return View(video);
         }

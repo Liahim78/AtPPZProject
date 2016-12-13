@@ -47,7 +47,8 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var oldUser = db.Users.Find(user.Id);
+                string id = User.Identity.GetUserId();
+                var oldUser = db.Users.Find(id);
                 oldUser.FirsName = user.FirsName;
                 oldUser.LastName = user.LastName;
                 oldUser.Birthday = user.Birthday;
