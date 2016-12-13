@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DAL.Entity.Video>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Popular Videos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UrlVideoContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discription)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <video controls="controls"
+                       class="video-stream"
+                       x-webkit-airplay="allow"
+                       data-youtube-id="N9oxmRT2YWw"
+                       src="@item.UrlVideoContent"></video>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Likes.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details","Videos", new { id = item.Id },null)
+            </td>
+        </tr>
+    }
+
+</table>
