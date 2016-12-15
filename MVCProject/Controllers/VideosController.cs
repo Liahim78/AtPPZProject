@@ -88,7 +88,7 @@ namespace MVCProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UrlVideoContent,IsPublicDiscription")] Video video)
+        public ActionResult Edit(Video video)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +136,15 @@ namespace MVCProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult OldVideo(int id)
+        {
+            var v = from video in db.Videos
+                    where video.MainId == id
+                    orderby video.Likes.Count descending
+                    select video;
+            return View(v.ToList());
         }
     }
 }

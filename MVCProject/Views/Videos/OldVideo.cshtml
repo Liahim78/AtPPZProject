@@ -2,20 +2,12 @@
 @model IEnumerable<DAL.Entity.Video>
 
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "OldVideo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Home</h2>
-<p>
-    @Html.ActionLink("Editing profile", "EditProfile","Home")
-</p>
-<p>
-    @Html.ActionLink("Create New Event", "Create", "Events")
-</p>
-<p>
-    @Html.ActionLink("Create New Video", "Create")
-</p>
+<h2>OldVideo</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -45,8 +37,8 @@
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @if (User.Identity.GetUserId() == item.MyUser.Id)
                 {
-                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) 
-                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 }
             </td>
         </tr>

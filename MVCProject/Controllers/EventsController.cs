@@ -15,6 +15,13 @@ namespace MVCProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult SensorGrajic(int? id)
+        {
+            var Volume = (from v in db.Volumes
+                    where v.Event.Id == id
+                    select v).ToList();
+            return View(Volume);
+        }
         // GET: Events
         public ActionResult Index()
         {

@@ -1,0 +1,18 @@
+﻿@model List<DAL.Entity.Volume>
+
+@{
+    ViewBag.Title = "SensorGrajic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SensorGrajic</h2>
+
+
+@foreach (var item in Model)
+{
+    <div name="divs" style="float: left; width: 100px; background-color: red; height: 300px; border: 3px"  >@item.Time</div>
+}
+<script>
+    
+</script>
+    
